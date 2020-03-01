@@ -1,6 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from two_factor.urls import urlpatterns as tf_urls
+
 
 urlpatterns = [
     url(r'^users/', include('smartmin.users.urls')),
@@ -9,4 +11,7 @@ urlpatterns = [
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),
+
+    # Urls for two factor authentication
+    url(r'', include(tf_urls)),
 ]

@@ -10,6 +10,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.urls import reverse
+from django.shortcuts import resolve_url
 from django.http import HttpResponseRedirect
 from django.template import loader
 from django.utils import timezone
@@ -474,3 +475,13 @@ class Login(LoginView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+    def get_success_url(self):
+        try:
+            user = getattr(self.request.user.settings, "two_factor_authentication")
+            org = getattr(self.request.user.org, "two_factor_authentication")
+            if user and org:
+                return reverse("two_factor:profile")
+        except AttributeError:
+            url = self.get_redirect_url()
+            return url or resolve_url(settings.LOGIN_REDIRECT_URL)

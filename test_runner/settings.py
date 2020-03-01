@@ -93,6 +93,8 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'smartmin.users.middleware.ChangePasswordMiddleware',
     'smartmin.middleware.TimezoneMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 )
 
 warnings.filterwarnings('error', r"DateTimeField received a naive datetime", RuntimeWarning,
@@ -146,6 +148,12 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'smartmin.csv_imports',
+
+    # Django two factor authentication
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
 )
 
 # A sample logging configuration. The only tangible logging
