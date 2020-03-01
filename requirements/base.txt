@@ -1,6 +1,7 @@
 celery
 django>=2.1,<3.0
 django_compressor
+django-otp==0.7.5
 django-two-factor-auth
 pytz
 redis
