@@ -477,7 +477,7 @@ class Login(LoginView):
             return self.form_invalid(form)
 
     def get_success_url(self):
-        return reverse("two_factor:profile")
+        return resolve_url("/account/two_factor/")
 
     # def get_success_url(self):
     #     try:
