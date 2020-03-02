@@ -477,11 +477,14 @@ class Login(LoginView):
             return self.form_invalid(form)
 
     def get_success_url(self):
-        try:
-            user = getattr(self.request.user.settings, "two_factor_authentication")
-            org = getattr(self.request.user.org, "two_factor_authentication")
-            if user and org:
-                return reverse("two_factor:profile")
-        except AttributeError:
-            url = self.get_redirect_url()
-            return url or resolve_url(settings.LOGIN_REDIRECT_URL)
+        return reverse("two_factor:profile")
+
+    # def get_success_url(self):
+    #     try:
+    #         user = getattr(self.request.user.settings, "two_factor_authentication")
+    #         org = getattr(self.request.user.org, "two_factor_authentication")
+    #         if user and org:
+    #             return reverse("two_factor:profile")
+    #     except AttributeError:
+    #         url = reverse("two_factor:profile")
+    #         return url or resolve_url(settings.LOGIN_REDIRECT_URL)
